@@ -8,7 +8,7 @@
                 <div class="social-item clearfix">
                     <hr class="small">
                     <div class="head row clearfix padding-left-ten padding-right-ten margin-bottom-fifteen">
-                        <div class="col-xs-8 pull-left">
+                        <div class="col-xs-8 pull-left social-profile-photo">
                             <div class="media-holder pull-left"
                                  ng-click="Thread.buildfire.auth.openProfile(Thread.post.userId)">
                                 <img ng-if="Thread.getUserImage(Thread.post.userId)" load-image="1x1" data-final-src="{{Thread.usersData | getUserImage: Thread.post.userId}}" crop-width="40" crop-height="40" crop-type="crop">
@@ -31,8 +31,9 @@
                             <img load-image="16x9" data-final-src="{{Thread.post.imageUrl}}" crop-width="342" crop-height="193" crop-type="resize">
                         </div>
                     </div>
-                    <div class="footer margin-bottom-ten clearfix">
-                        <div class="icons col-xs-3 padding-right-zero padding-left-ten pull-left">
+					<hr class="small">
+                    <div class="footer clearfix">
+                        <div class="icons col-xs-3 padding-right-zero padding-left-zero pull-left">
                             <a class="social-icon" ng-click="Thread.likeThread(Thread.post, 'thread')">
                                 <span class="icon icon-heart"
                                       ng-class="{inactive: Thread.post.isUserLikeActive}"></span>
@@ -51,14 +52,15 @@
                             </div>
                         </div>
                     </div>
-                    <hr class="small margin-bottom-zero">
+                    <hr class="small" ng-show="Thread.post.commentsCount > 0" style="margin-top:10px">
                     <div ng-if="Thread.post.commentsCount > 10 && Thread.showMore"
                          class="padded head-btn text-center padding-bottom-ten margin-bottom-five">
                         <a ng-click="Thread.loadMoreComments()">Load More Comments</a>
                     </div>
                     <div class="comments-list">
-                        <div class="social-comment" ng-repeat="comment in Thread.comments">
-                            <hr class="small">
+							
+                        <div class="social-comment" ng-repeat="comment in Thread.comments">  
+							<hr class="small">
                             <div class="head row clearfix padding-left-ten padding-right-ten margin-bottom-zero">
                                 <div class="col-xs-8 pull-left">
                                     <p class="text-primary ellipsis margin-top-five margin-bottom-zero">
@@ -83,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="footer margin-bottom-ten clearfix">
-                                <div class="icons col-xs-3 padding-right-zero padding-left-ten pull-left">
+                                <div class="icons col-xs-3 padding-right-zero padding-left-zero pull-left">
                                     <a class="social-icon" ng-click="Thread.likeComment(comment, 'comment')">
                                     <span class="icon icon-heart"
                                           ng-class="{inactive: comment.isUserLikeActive}"></span>
@@ -93,7 +95,7 @@
                                     <div class="pull-right">
                                         <p class="pull-left margin-bottom-zero opacity-seventy">{{comment.likesCount?comment.likesCount:0}} Like<span ng-hide="comment.likesCount == 1">s</span></p>
                                         <!--<p class="pull-left margin-bottom-zero margin-left-twenty">5 Comments</p>-->
-                                        <a class="more-info"  ng-if="Thread.userDetails.userId == comment.userId" ng-click="Thread.showMoreOptionsComment(comment._id)"">
+                                        <a class="more-info"  ng-if="Thread.userDetails.userId == comment.userId" ng-click="Thread.showMoreOptionsComment(comment._id)">
                                             <span class="pull-left icon icon-ellipsis margin-left-twenty"></span>
                                         </a>
                                        <!-- <a style="float: right; margin-right: 5px" ng-click="Thread.deleteComment(comment._id)"

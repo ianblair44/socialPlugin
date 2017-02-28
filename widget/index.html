@@ -55,9 +55,9 @@
                              infinite-scroll="WidgetWall.SocialItems.posts()"
                              infinite-scroll-disabled="WidgetWall.SocialItems.busy" ng-cloak>
                             <div class="social-item clearfix" ng-repeat="post in WidgetWall.SocialItems.items">
-                                <hr class="small">
+                                
                                 <div class="head row clearfix padding-left-ten padding-right-ten margin-bottom-fifteen">
-                                    <div class="col-xs-8 pull-left">
+                                    <div class="col-xs-8 pull-left social-profile-photo">
                                         <div class="media-holder pull-left ng-cloak" ng-click="WidgetWall.buildfire.auth.openProfile(post.userId)">
                                             <img ng-if="WidgetWall.getUserImage(post.userId)" load-image="1x1"
                                                  data-final-src="{{WidgetWall.usersData | getUserImage: post.userId}}" crop-width="40" crop-height="40" crop-type="crop">
@@ -87,12 +87,13 @@
 										</a>
                                     </div>
                                 </div>
-                                <div class="footer clearfix" style="margin-bottom:6px;">
-                                    <div class="icons col-xs-3 padding-right-zero padding-left-ten pull-left">
+								<hr class="small">
+                                <div class="footer clearfix" style="margin-top:-5px;">
+                                    <div class="icons col-xs-3 padding-right-zero padding-left-zero pull-left">
                                         <a class="social-icon ng-cloak" ng-click="WidgetWall.likeThread(post, 'thread')">
                                             <span class="icon icon-heart" ng-class="{inactive: WidgetWall.isLikedByLoggedInUser(post._id)}"></span>
                                         </a>
-                                        <a href="#/thread/{{post.uniqueLink}}" class="social-icon margin-left-twenty ng-cloak">
+                                        <a href="#/thread/{{post.uniqueLink}}" class="social-icon ng-cloak">
                                             <span class="icon icon-bubble"></span>
                                         </a>
                                     </div>

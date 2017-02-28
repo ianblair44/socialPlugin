@@ -217,12 +217,21 @@
 	position:absolute;
 	width:100%;
 }
+.social-wall, .social-thread {
+	background-color: #f9f9f9;
+}
+.social-icon {
+	padding: 9px;
+}
 /* End Plugin CSS */
 
 
 /* Join Group Link */
 .head-btn a{
 	display:block;
+}
+.head-btn {
+	background-color: #fff;
 }
 
 /* Group Single Post */
@@ -231,6 +240,9 @@
 	display:none;
 }
 /* Single Post*/
+.social-profile-photo {
+	margin-left: -9px;
+}
 .social-thread .social-item:nth-child(2) > hr.small:first-child,
 .social-comment:first-child > hr.small:first-child{
 	display:none;
@@ -250,13 +262,13 @@
 	font-size:12px;
 }
 .footer .icon{
-	font-size:18px;
+	font-size:20px;
 }
 .footer .icon.inactive{
 	color:#777 !important;
 }
 .footer .status p{
-	font-size:13px;
+	font-size:15px;
 	line-height:20px;
 }
 .social-item hr.small{
@@ -264,6 +276,14 @@
 }
 .social-comment hr.small{
 	margin-bottom:5px;
+}
+
+.social-item {
+	margin: 0 5px 18px 5px;
+	padding: 10px;
+	background-color: #fff;
+	border-radius: 2px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 /* Bottom Message */
@@ -308,26 +328,26 @@
 	position:absolute;
 	right:0px;
 	top:0px; 
-	width:49px;
+	width:60px;
 	height:100%;
 }
 .holder.bottom-post .post-holder .add-media .icon{
-	font-size:20px;
+	font-size:22px;
 	line-height:24px;
 	color:inherit !important;
 	position:relative;
-	top:1px;
+	top:5px;
 }
 .holder.bottom-post .post-holder .send-message input{
 	border:none;
 	background:none;
 	height:100%;
 	width:100%;
-	padding-top:11px;
+	padding-top:13px;
 }
 @media(max-width: 620px){
 	p{
-		font-size:13px;
+		font-size:15px;
 	}
 }
 
@@ -338,7 +358,7 @@
 	padding: 2.5% 2%;
 	line-height:25px;
 	position:relative;
-	top:3px;
+	top:6px;
 	width:100%;
 }
 
@@ -374,7 +394,7 @@
     height: 35px !important;
 }
 .post-container {
-    height: inherit !important;
+    height: 50px !important;
 }
 .filename {
     color: #555555 !important;
