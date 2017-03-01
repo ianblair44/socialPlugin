@@ -47,7 +47,7 @@
             <div class="padding-zero" style="height: 100%;">
                 <div class="social-plugin social-wall" style="height: calc(100% - 39px)">
                     <div  ng-if="WidgetWall.SocialItems.socialAppId" class="head-btn text-center margin-bottom-fifteen" style="margin:0 !important;">
-                        <a ng-click="WidgetWall.followUnfollow(WidgetWall.getFollowingStatus())" class="ng-cloak">{{WidgetWall.getFollowingStatus()}}</a>
+                        <a style="color:#5f5f5f" ng-click="WidgetWall.followUnfollow(WidgetWall.getFollowingStatus())" class="ng-cloak">{{WidgetWall.getFollowingStatus()}}</a>
                     </div>
                     <div style="overflow-x:hidden; width:100%; overflow-y: auto;height: calc(100% - 47px); padding-top: 15px !important;" class="infinite-scroll-parent">
                         <div style="height: 20px;" id="top" infinite-scroll-distance="0"
@@ -65,7 +65,7 @@
                                             data-final-src="../../../styles/media/avatar-placeholder.png" crop-width="40" crop-height="40" crop-type="default">
                                         </div>
                                         <p class="text-primary ellipsis margin-top-ten margin-bottom-zero padding-left-ten">
-                                            <a class="text-primary ng-cloak" ng-click="WidgetWall.buildfire.auth.openProfile(post.userId)">{{WidgetWall.getUserName(post.userId)}}</a>
+                                            <a class="ng-cloak social-name" ng-click="WidgetWall.buildfire.auth.openProfile(post.userId)">{{WidgetWall.getUserName(post.userId)}}</a>
                                         </p>
                                     </div>
                                     <div class="col-xs-3 pull-right margin-top-ten text-right">
@@ -75,7 +75,7 @@
                                 <!--<a href="#" class="btn-delete-icon btn-danger" ng-click="WidgetWall.deletePost(post._id)" ng-if="WidgetWall.SocialItems.userDetails.userId == post.userId" style="float: right;margin-right: 5px;z-index: 1 !important;"></a>-->
                                 <div class="copy padding-left-ten padding-right-ten margin-bottom-fifteen">
                                     <p class="margin-zero cursor-pointer">
-                                        <span ng-click="WidgetWall.goInToThread(post.uniqueLink)" ng-bind-html="(post.text | limitTo : (post.limit || 150) :0) | newLine"></span>
+                                        <span style="padding:20px 0" ng-click="WidgetWall.goInToThread(post.uniqueLink)" ng-bind-html="(post.text | limitTo : (post.limit || 150) :0) | newLine"></span>
                                         <span ng-if="(post.text.length>150 && !post.seeMore)" class="ng-cloak">...</span>
                                         <a ng-if="(post.text.length>150 && !post.seeMore)" ng-click="WidgetWall.seeMore(post)" class="ng-cloak">Read More</a>
 									</p>
@@ -100,7 +100,10 @@
                                     <div class="status col-xs-9 padding-left-zero padding-right-ten pull-right">
                                         <div class="pull-right">
                                             <p class="pull-left margin-bottom-zero opacity-seventy ng-cloak">{{post.likesCount}} Like<span ng-hide="post.likesCount == 1">s</span></p>
-                                            <p class="pull-left margin-bottom-zero margin-left-twenty opacity-seventy ng-cloak">{{post.commentsCount}} Comment<span ng-hide="post.commentsCount == 1">s</span></p>
+                                            <p class="pull-left margin-bottom-zero margin-left-twenty opacity-seventy ng-cloak">
+												<a href="#/thread/{{post.uniqueLink}}" style="color:#5f5f5f;">
+													{{post.commentsCount}} Comment<span ng-hide="post.commentsCount == 1">s</span></p>
+												</a>
                                             <a class="more-info ng-cloak" ng-click="WidgetWall.showMoreOptions(post)">
                                                 <span class="pull-left icon icon-ellipsis margin-left-twenty"></span>
                                             </a>

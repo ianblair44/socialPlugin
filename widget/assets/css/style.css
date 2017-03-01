@@ -222,6 +222,20 @@
 }
 .social-icon {
 	padding: 9px;
+	color: #ea4545;
+}
+.social-icon:hover {
+	color: #ea4545;
+}
+.icon-bubble, .more-info {
+	color: #444;
+}
+.social-name {
+	font-weight: 400;
+	color: #444;
+}
+hr {
+	border-top: 1px solid #f2f2f2 !important;
 }
 /* End Plugin CSS */
 
@@ -265,7 +279,7 @@
 	font-size:20px;
 }
 .footer .icon.inactive{
-	color:#777 !important;
+	color:#444 !important;
 }
 .footer .status p{
 	font-size:15px;
