@@ -24,11 +24,11 @@
         })
         .constant('THREAD_STATUS', {
             FOLLOW: "Follow Thread",
-            FOLLOWING: "Following Thread"
+            FOLLOWING: "Leave Thread"
         })
         .constant('GROUP_STATUS', {
-            FOLLOW: "Join Group",
-            FOLLOWING: "Joined Group"
+            FOLLOW: "Follow Group",
+            FOLLOWING: "Leave Group"
         })
         .constant('FILE_UPLOAD', {
             CANCELLED : "Cancelled",

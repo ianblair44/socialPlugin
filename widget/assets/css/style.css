@@ -237,6 +237,9 @@
 hr {
 	border-top: 1px solid #f2f2f2 !important;
 }
+img {
+	max-width: 100%;
+}
 /* End Plugin CSS */
 
 
@@ -280,6 +283,9 @@ hr {
 }
 .footer .icon.inactive{
 	color:#444 !important;
+}
+.footer .icon.inactive:hover{
+	color:#ea4545 !important;
 }
 .footer .status p{
 	font-size:15px;
