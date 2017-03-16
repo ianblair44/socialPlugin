@@ -48,6 +48,42 @@
                 },
                 getProxyServerUrl: function () {
                     return this.requiresHttps() ? SERVER_URL.secureLink : SERVER_URL.link;
+                },injectAnchors:function (text,options) {
+                    text = decodeURIComponent(text);
+                    var URL_CLASS = "reffix-url";
+                    var URLREGEX = /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/;
+                    var EMAILREGEX = /([\w\.]+)@([\w\.]+)\.(\w+)/g;
+
+                    if(!options)options={injectURLAnchors:true,injectEmailAnchors:true};
+                    var lookup=[];
+                    if(!options.urlAnchorGen)
+                        options.urlAnchorGen = function(url){
+                            return {url:url,target:'_system'}
+                        };
+                    if(options.injectURLAnchors)
+                        text= text.replace(URLREGEX, function(url) {
+                            var obj = options.urlAnchorGen(url);
+                            if(obj.url && obj.url.indexOf('http') !== 0 && obj.url.indexOf('https') !== 0){
+                                obj.url = 'http://' + obj.url;
+                            }
+                            lookup.push("<a href='" + obj.url + "' target='" + obj.target + "' >" + url + "</a>");
+                            return "_RF" + (lookup.length -1) + "_";
+                        });
+                    if(!options.emailAnchorGen)
+                        options.emailAnchorGen = function(email){
+                            return {url:"mailto:" + email,target:'_system'}
+                        };
+                    if(options.injectEmailAnchors)
+                        text= text.replace(EMAILREGEX, function(url) {
+                            var obj = options.emailAnchorGen(url);
+                            lookup.push("<a href='" + obj.url + "' target='" + obj.target + "'>" + url + "</a>");
+                            return "_RF" + (lookup.length -1) + "_";
+                        });
+                    /// this is done so you dont swap what was injected
+                    lookup.forEach(function(e,i){
+                        text = text.replace("_RF" + i + "_",e);
+                    });
+                    return text;
                 }
             }
         }])
@@ -77,8 +113,8 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDataObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDataObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(successCallback, errorCallback);
                     /*$http.get('http://social.kaleoapps.com/src/server.js?data={"id":1,"method":"thread/add","params":{"appId":"551ae57f94ed199c3400002e","parentThreadId":"564f676cfbe10b9c240002ff","userToken":"ouOUQF7Sbx9m1pkqkfSUrmfiyRip2YptbcEcEcoX170=","text":"testThread","title":"","imageUrl":null,"secureToken":null},"userToken":null}').then(successCallback, errorCallback);*/
                     return deferred.promise;
@@ -100,8 +136,8 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDataObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDataObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(successCallback, errorCallback);
                     return deferred.promise;
                 },
@@ -130,8 +166,8 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDataObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDataObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(successCallback, errorCallback);
                     return deferred.promise;
                 },
@@ -157,8 +193,8 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDataObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDataObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(successCallback, errorCallback);
                     return deferred.promise;
                 },
@@ -183,8 +219,8 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDataObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDataObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(successCallback, errorCallback);
                     return deferred.promise;
                 },
@@ -215,8 +251,8 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDataObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDataObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(successCallback, errorCallback);
                     return deferred.promise;
                 },
@@ -267,8 +303,8 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDataObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDataObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(successCallback, errorCallback);
                     return deferred.promise;
                 },
@@ -297,8 +333,8 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDataObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDataObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(successCallback, errorCallback);
                     return deferred.promise;
                 },
@@ -321,8 +357,8 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDataObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDataObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(success, error);
                     return deferred.promise;
                 },
@@ -353,8 +389,8 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDataObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDataObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(successCallback, errorCallback);
                     return deferred.promise;
                 },
@@ -401,8 +437,8 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDeleteObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDeleteObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(successCallback, errorCallback);
                     return deferred.promise;
                 },
@@ -427,14 +463,14 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDeleteObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDeleteObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(successCallback, errorCallback);
                     return deferred.promise;
                 }
             }
         }])
-        .factory('SocialItems', ['Buildfire', '$http', 'Util', 'Location', function (Buildfire, $http, Util, Location) {
+        .factory('SocialItems', ['Buildfire', '$http', 'Util', 'Location', '$routeParams', 'SocialDataStore','$rootScope', function (Buildfire, $http, Util, Location, $routeParams, SocialDataStore,$rootScope) {
             var _this;
             var SocialItems = function () {
                 _this = this;
@@ -444,12 +480,19 @@
                 _this.context = {};
                 _this.parentThreadId = null;
                 _this.socialAppId = null;
+                _this.appSettings = null;
                 _this.userDetails = {};
                 _this.userDetails.userToken = null;
                 _this.userDetails.userId = null;
                 _this.userDetails.settingsId = null;
+                _this.userDetails.userTags = null;
                 _this._receivePushNotification;
                 _this.postMehodCalledFlag = false;
+                _this.newPostTimerChecker = null;
+                _this.newPostAvailable = false;
+                _this.newCommentsAvailable = false;
+                _this.pauseNewPostBgService = false;
+                _this.comments = [];
 
             };
             var instance;
@@ -461,7 +504,9 @@
                 _this.busy = true;
                 if (_this.parentThreadId && _this.socialAppId) {
                     console.log('Inside if---------------------------------------this', _this);
-                    getPosts();
+                    getPosts(function () {
+                        startBackgroundService();
+                    });
                 }
                 else {
                     console.log('Inside else 1---------------------------------------this', _this);
@@ -486,15 +531,19 @@
                         if (data && data.data) {
                             _this.socialAppId = data && data.data && data.data.socialAppId;
                             _this.parentThreadId = data && data.data && data.data.parentThreadId;
+                            _this.appSettings = data && data.data && data.data.appSettings;
                             console.log('Inside else 2---------------------------------------this', _this);
-                            getPosts();
+                            getPosts(function () {
+                                startBackgroundService();
+                            });
                         }
                         else {
                             getAppIdAndParentThreadId();
                         }
                     });
                 }
-                function getPosts() {
+
+                function getPosts(callback) {
                     console.log('getPosts called');
                     var postDataObject = {};
                     postDataObject.id = '1';
@@ -508,8 +557,8 @@
                     $http({
                         method: 'GET',
                         url: Util.getProxyServerUrl(),
-                        params: { data: postDataObject },
-                        headers: { 'Content-Type': 'application/json' }
+                        params: {data: postDataObject},
+                        headers: {'Content-Type': 'application/json'}
                     }).then(function (data) {
                         console.log('Get posts in service of SocialItems-------------------------', data);
                         if (data && data.data && data.data.result && data.data.result.length) {
@@ -521,24 +570,118 @@
                         else {
                             _this.busy = true;
                         }
+                        if (callback)
+                            callback();
 
                     }, function (err) {
                         _this.busy = false;
                         console.log('Get posts in service of SocialItems---------err----------------', err);
+                        if (callback)
+                            callback();
+                    });
+                }
+
+                function startBackgroundService() {
+                    if (!_this.newPostTimerChecker) {
+                        console.info('Start background for new posts availability');
+                        _this.newPostTimerChecker = setInterval(function () {
+                            console.info('Background service check for new posts or comments.....');
+                            checkNewPostsAvailability();
+                        }, 10000);
+                    }
+                }
+
+                function checkNewPostsAvailability() {
+                    if(_this.pauseNewPostBgService)
+                        return;
+
+                    console.log('getPosts called');
+                    var postDataObject = {};
+                    postDataObject.id = '1';
+                    postDataObject.method = 'thread/findByPage';
+                    postDataObject.params = {};
+                    postDataObject.params.appId = _this.socialAppId;
+                    postDataObject.params.parentThreadId = _this.parentThreadId;
+                    postDataObject.params.lastThreadId = null;
+                    postDataObject.userToken = null;
+                    console.log('Post data in services-------------------', postDataObject);
+                    $http({
+                        method: 'GET',
+                        url: Util.getProxyServerUrl(),
+                        params: {data: postDataObject},
+                        headers: {'Content-Type': 'application/json'},
+                        silent:true
+                    }).then(function (response) {
+                        if(_this.pauseNewPostBgService)
+                            return;
+
+                        var _newPostsAvailable = false;
+                        if (response
+                            && response.data
+                            && response.data.result
+                            && response.data.result.length) {
+                            if (_this.items.length == 0 || response.data.result[0]._id != _this.items[0]._id) {
+                                _newPostsAvailable = true;
+                            }
+                        }
+
+                        _this.newPostAvailable = _newPostsAvailable;
+
+                    }, function (err) {
+
+                    });
+                }
+
+                function checkNewCommentsAvailability(threadId) {
+                    //todo this not used now until we fix comments api to get the news comments instead of the oldest
+                    //if side thread is active
+                    var posts = _this.items.filter(function (el) {
+                        return el.uniqueLink == threadId;
+                    });
+
+                    var post = posts[0] || {};
+                    SocialDataStore.getCommentsOfAPost({
+                        threadId: post._id,
+                        lastCommentId: null,
+                        userToken: null,
+                        appId: _this.socialAppId
+                    }).then(function (response) {
+                        var _newCommentsAvailable = false;
+                        if (response
+                            && response.data
+                            && response.data.result
+                            && response.data.result.length) {
+                            if (_this.comments.length == 0 ||
+                                response.data.result[response.data.result.length - 1]._id != _this.comments[_this.comments.length - 1]._id) {
+                                _newCommentsAvailable = true;
+                            }
+                        }
+
+                        _this.newCommentsAvailable = _newCommentsAvailable;
+                    }, function (err) {
+                        console.log('Error while logging in user is: ', err);
                     });
                 }
             };
 
-            SocialItems.prototype.loggedInUserDetails = function () {
+            SocialItems.prototype.loggedInUserDetails = function (callback) {
                 Buildfire.datastore.get('Social', function (err, data) {
+                    if (err) {
+                        if (callback)
+                            callback(err, null);
+                    }
                     console.log('Get------------data--------datastore--------', err, data);
                     _this.socialAppId = data && data.data && data.data.socialAppId;
                     _this.parentThreadId = data && data.data && data.data.parentThreadId;
+                    _this.appSettings = data && data.data && data.data.appSettings;
                     Buildfire.auth.getCurrentUser(function (err, userData) {
                         console.info('Current Logged In user details are -----------------', userData);
+
                         if (userData) {
                             _this.userDetails.userToken = userData.userToken;
                             _this.userDetails.userId = userData._id;
+                            _this.userDetails.userTags = userData.tags;
+
                             var postDataObject = {};
                             postDataObject.id = '1';
                             postDataObject.method = 'users/getUserSettings';
@@ -550,8 +693,8 @@
                             $http({
                                 method: 'GET',
                                 url: Util.getProxyServerUrl(),
-                                params: { data: postDataObject },
-                                headers: { 'Content-Type': 'application/json' }
+                                params: {data: postDataObject},
+                                headers: {'Content-Type': 'application/json'}
                             }).then(function (response) {
                                 console.log('inside getUser settings :::::::::::::', response);
                                 if (response && response.data && response.data.result) {
@@ -566,12 +709,26 @@
                                 console.log('Error while logging in user is: ', err);
                             });
                         }
+
+                        if (callback)
+                            callback(err, userData);
                     });
                 });
             };
+
             SocialItems.prototype.checkPostsCalled = function () {
                 return _this.postMehodCalledFlag && (_this.items.length > 0);
-            }
+            };
+
+            SocialItems.prototype.init = function () {
+                _this.lastThreadId = null;
+                _this.items = [];
+                _this.busy = false;
+                _this.newPostAvailable = false;
+                _this.comments = [];
+                _this.newCommentsAvailable = false;
+            };
+
             return {
                 getInstance: function () {
                     if (!instance) {
